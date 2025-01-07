@@ -6,4 +6,13 @@ const request = rest.wrap(mime);
 const getListOfRestEndPoint = () => request(`https://www.anapioficeandfire.com/api`)
 const getBooks = () => request(`https://www.anapioficeandfire.com/api/books`)
 
-export {getListOfRestEndPoint, getBooks}
+const getHouse = () => {
+    return new Promise((resolve) => {
+        resolve({
+            name: "House Allyrion of Godsgrace",
+            region: "Dorne"
+        });
+    });
+};
+
+export { getListOfRestEndPoint, getBooks, getHouse };

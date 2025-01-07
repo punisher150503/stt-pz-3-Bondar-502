@@ -27,3 +27,31 @@ describe('#getBooks() using Promises', () => {
             })
     })
 })
+
+describe('#getHouses() using Promises', () => {
+    it('should load houses data', () => {
+        apiIceAndFire.getListOfRestEndPoint()
+            .then(data => {
+                expect(data.entity.houses).toBeDefined();
+                expect(data.entity.houses).toEqual('https://www.anapioficeandfire.com/api/houses');
+            });
+    });
+});
+
+describe('#getSpecificHouse() using Promises', () => {
+    it('should load specific house data', () => {
+        const specificHouse = {
+            name: "House Allyrion of Godsgrace",
+            region: "Dorne"
+        };
+        // Моковані дані для будинку
+        jest.spyOn(apiIceAndFire, 'getHouse').mockImplementation(() => Promise.resolve(specificHouse));
+
+        apiIceAndFire.getHouse()
+            .then(data => {
+                expect(data).toBeDefined();
+                expect(data.name).toEqual('House Allyrion of Godsgrace');
+                expect(data.region).toEqual('Dorne');
+            });
+    });
+});
